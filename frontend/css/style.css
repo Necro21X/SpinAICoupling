@@ -1,0 +1,63 @@
+/* Basic reset and page background */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f2f4f8;
+    color: #222;
+}
+
+/* Centered card that holds the whole chat */
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-top: 0;
+    text-align: center;
+}
+
+/* Message area (empty for now) */
+.chat-log {
+    min-height: 300px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow-y: auto;
+}
+
+/* Input field and button sit next to each other */
+.chat-form {
+    display: flex;
+    gap: 10px;
+}
+
+/* Text field takes all remaining horizontal space */
+.chat-form input {
+    flex: 1;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Send button */
+.chat-form button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #2d6cdf;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Hover effect for the button */
+.chat-form button:hover {
+    background-color: #1f54b5;
+}

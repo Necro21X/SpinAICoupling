@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- Front page of the SpinAICoupling project -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Makes the page scale correctly on small screens -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpinAICoupling</title>
+    <!-- Stylesheet and script are served by FastAPI under /static -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <main class="container">
+        <h1>SpinAICoupling</h1>
+
+        <!-- Area where chat messages will be displayed later -->
+        <div id="chat-log" class="chat-log"></div>
+
+        <!-- Chat form: text field and send button -->
+        <form id="chat-form" class="chat-form">
+            <input
+                type="text"
+                id="chat-input"
+                placeholder="Type your message..."
+                autocomplete="off"
+            >
+            <button type="submit" id="chat-button">Send</button>
+        </form>
+    </main>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
