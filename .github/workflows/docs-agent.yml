@@ -1,0 +1,91 @@
+# .github/workflows/docs-agent.yml
+# Nightly documentation agent: only runs Claude when there are new commits.
+name: Docs agent
+
+on:
+  schedule:
+    - cron: "0 1 * * *"     # daily 01:00 UTC (02:00 Zurich in winter, 03:00 in summer)
+  workflow_dispatch:         # manual "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+concurrency:
+  group: docs-agent
+  cancel-in-progress: false
+
+jobs:
+  document:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0       # full history so we can diff against the last documented commit
+
+      # ---- 1. Did anything change since the last documented commit? ----
+      - name: Check for new changes
+        id: check
+        run: |
+          HEAD_SHA=$(git rev-parse HEAD)
+          LAST=$(cat docs/.last-documented 2>/dev/null | tr -d '[:space:]' || true)
+
+          if [ -z "$LAST" ] || ! git cat-file -e "${LAST}^{commit}" 2>/dev/null; then
+            # First run, or the stored SHA no longer exists (e.g. after a force-push)
+            echo "No valid last-documented SHA, documenting full history."
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "range=" >> "$GITHUB_OUTPUT"
+          else
+            # Real commits since LAST, ignoring:
+            #  - merge commits (no content of their own)
+            #  - the agent's own "docs: auto-update" commits
+            #  - commits that only touch the generated docs
+            NEW=$(git log --no-merges --invert-grep --grep='^docs: auto-update' --format=%H \
+                  "${LAST}..HEAD" -- . \
+                  ':!docs/CHANGELOG.md' ':!docs/DEVLOG.md' ':!docs/ARCHITECTURE.md' \
+                  ':!docs/decisions' ':!docs/.last-documented' ':!DOCS_GUIDE.md')
+            if [ -z "$NEW" ]; then
+              echo "No changes since ${LAST}, skipping."
+              echo "changed=false" >> "$GITHUB_OUTPUT"
+            else
+              echo "Found $(echo "$NEW" | wc -l) new commit(s)."
+              echo "changed=true" >> "$GITHUB_OUTPUT"
+              echo "range=${LAST}..${HEAD_SHA}" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+          echo "head=${HEAD_SHA}" >> "$GITHUB_OUTPUT"
+
+      # ---- 2. Only if something changed: let the agent update the docs ----
+      - name: Run Claude Code
+        if: steps.check.outputs.changed == 'true'
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          claude_args: >-
+            --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git log:*),Bash(git diff:*),Bash(git show:*)"
+          prompt: |
+            Read DOCS_GUIDE.md and follow it exactly.
+
+            Commit range to document: "${{ steps.check.outputs.range }}"
+            (If the range is empty, this is the first run: document the
+            project's full history and current state.)
+
+            Use `git log --no-merges` and `git diff` / `git show` on that range
+            to understand what changed. Update the files in docs/ as the guide
+            describes. Do not edit anything outside docs/.
+            When done, write exactly this SHA into docs/.last-documented:
+            ${{ steps.check.outputs.head }}
+
+      # ---- 3. Open (or update) a PR with the result ----
+      - name: Open PR
+        if: steps.check.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: docs/auto-update
+          title: "docs: auto-update from recent commits"
+          body: "Automated documentation update for `${{ steps.check.outputs.range || 'full history' }}`. Please review before merging."
+          commit-message: "docs: auto-update"
+          add-paths: docs/
+          delete-branch: true
