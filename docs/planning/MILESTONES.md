@@ -9,9 +9,9 @@
 ## Milestone Tracker
 | Milestone | Target Date | Owner | Status | Exit Criteria |
 |-----------|-------------|-------|--------|---------------|
-| Milestone 1 | | | Not Started | |
-| Milestone 2 | | | Not Started | |
-| Milestone 3 | | | Not Started | |
+| Working Frontend | | | Not Started | |
+| Test Agent  | | | Not Started | |
+| Workflows | | | Not Started | |
 
 ## Notes
 - 
