@@ -9,9 +9,9 @@
 ## Backlog
 | ID | Task | Priority | Owner | Status | Due Date | Dependencies |
 |----|------|----------|-------|--------|----------|--------------|
-| 1 | | Endpoint for Chatting with Models | | Not Started | | |
+| 1 | | Endpoint for Chatting with Models | | In Progress | | |
 | 2 | | Tools für Datenbankabfrage | | Not Started | | |
-| 3 | | Automatic Documentation Agent | | Not Started | | |
+| 3 | | Automatic Documentation Agent | | In Progress | | |
 
 ## Notes
 - 
