@@ -1,54 +1,32 @@
 # Project Plan
 
 ## 1) Project Summary
-- **Project Name:**
-- **Owner:**
-- **Last Updated:**
-- **Target Completion Date:**
+- **Project Name: SpinAICoupling**
+- **Owner: Denis & Elias**
+- **Last Updated: Höt giu**
+- **Target Completion Date: 2050 i guess**
 
 ## 2) Problem Statement
 - What problem are we solving?
+    Inefficient company usage of AI. Streamlining AI processes for companies that do not have manpower to do it themselves.
 - Why is this important now?
+    Filtering important and useful information out of the massive amount of trash is something not many companies are able to do.
 
 ## 3) Goals
-- **Primary Goal 1:**
-- **Primary Goal 2:**
-- **Primary Goal 3:**
+- **Primary Goal 1: Working Prototype**
+- **Primary Goal 2: Getting one company reply**
+- **Primary Goal 3: First customer**
 
-## 4) Non-Goals
-- Out-of-scope item 1
-- Out-of-scope item 2
-
-## 5) Success Metrics
-- **Metric 1:**
-- **Metric 2:**
-- **Metric 3:**
-
-## 6) Scope
+## 4) Scope
 ### In Scope
-- 
+- Working assistant prototype to present
+- 100'000 Mails
 
-### Out of Scope
-- 
-
-## 7) Risks and Mitigations
+## 5) Risks and Mitigations
 | Risk | Impact | Likelihood | Mitigation | Owner |
 |------|--------|------------|------------|-------|
-|      |        |            |            |       |
+|   Doesn't work   |   Time loss     |     High     |    None      |  Beidi   |
 
-## 8) Dependencies
-- Team/Service dependency:
-- External dependency:
-
-## 9) Timeline
-| Phase | Start | End | Status | Notes |
-|------|-------|-----|--------|-------|
-| Discovery | | | Not Started | |
-| Implementation | | | Not Started | |
-| Validation | | | Not Started | |
-| Launch | | | Not Started | |
-
-## 10) Approvals
-- [ ] Product
-- [ ] Engineering
-- [ ] Stakeholders
+## 6) Dependencies
+- Team/Service dependency: none
+- External dependency: none

@@ -11,3 +11,6 @@ This folder contains starter templates for planning work in this repository.
 1. Copy each template section and fill in project-specific details.
 2. Keep status fields up to date as work evolves.
 3. Review weekly and adjust priorities.
+
+
+![Project Plan](/docs/planning/Project%20Plan.png "Projektplan")
