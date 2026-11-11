@@ -16,7 +16,3 @@ app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 @app.get("/")
 async def root():
     return FileResponse(FRONTEND_DIR / "index.html")
-
-@app.get("/update")
-async def update():
-    return {"message" : "You have requested an update"}
