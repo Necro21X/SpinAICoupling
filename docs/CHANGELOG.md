@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-11 (update)
+
+### Changed
+- Claude code review workflow (`.github/workflows/claude-code-review.yml`) now also allows reviews triggered by the github-actions bot.
+
 ## 2026-11-11
 
 ### Added
