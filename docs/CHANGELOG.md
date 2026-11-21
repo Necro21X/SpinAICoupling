@@ -13,6 +13,7 @@
 - `DOCS_GUIDE.md` instructions for the docs agent.
 
 ### Changed
+- Claude code review workflow (`.github/workflows/claude-code-review.yml`) now also accepts PRs opened by the `github-actions` bot (`allowed_bots` setting).
 - Project plan and milestones were revised.
 - Backend scaffolding reshuffled: `backend/main.py` reduced, empty `backend/chatbot.py` and `backend/helper_functions/helper.py` added.
 - Docs agent workflow credentials were updated.
