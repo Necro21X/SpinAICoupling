@@ -19,3 +19,6 @@
 
 ### Removed
 - Initial `test.py` file.
+
+### Fixed
+- Claude code review workflow (`.github/workflows/claude-code-review.yml`) now allows PRs opened by the `github-actions` bot.
